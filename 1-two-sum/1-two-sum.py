@@ -6,4 +6,3 @@ class Solution:
             if remaining in visited:
                 return [idx, visited[remaining]]
             visited[num] = idx
-        return []
