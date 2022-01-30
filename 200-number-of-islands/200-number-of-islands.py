@@ -59,7 +59,7 @@ class Solution:
 #         self.traverse(i, j-1, grid, landInfo)
 #         self.traverse(i, j+1, grid, landInfo)
 # 
-#     Sol#3
+#     Sol#3 (DFS - optimizaztion in recursive call)
     def numIslands(self, grid: List[List[str]]) -> int:
         numberOfIslands = 0
         for i in range(len(grid)):
@@ -75,8 +75,6 @@ class Solution:
             return
         if j < 0 or j >= len(grid[i]):
             return
-        # if grid[i][j] is "0":
-        #     return
         grid[i][j] = "0"
         if i+1 < len(grid) and grid[i+1][j] is "1":
             self.traverse(i+1, j, grid)
