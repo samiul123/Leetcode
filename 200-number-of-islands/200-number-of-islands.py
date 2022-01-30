@@ -24,7 +24,7 @@ class Solution:
         if visited[i][j]:
             return
         visited[i][j] = True
-        if grid[i][j] == "0":
+        if grid[i][j] is "0":
             return
         landInfo.currentSize += 1
         self.traverse(i+1, j, visited, grid, landInfo)
