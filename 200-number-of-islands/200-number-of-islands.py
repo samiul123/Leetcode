@@ -71,10 +71,10 @@ class Solution:
     
     
     def traverse(self, i, j, grid):
-        if i < 0 or i >= len(grid):
-            return
-        if j < 0 or j >= len(grid[i]):
-            return
+        # if i < 0 or i >= len(grid):
+        #     return
+        # if j < 0 or j >= len(grid[i]):
+        #     return
         grid[i][j] = "0"
         if i+1 < len(grid) and grid[i+1][j] is "1":
             self.traverse(i+1, j, grid)
