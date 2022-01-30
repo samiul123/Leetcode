@@ -34,18 +34,43 @@ class Solution:
 #         self.traverse(i, j+1, visited, grid, landInfo)
 # 
 #     Sol#2 (DFS-without visited array)
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         numberOfIslands = 0
+#         for i in range(len(grid)):
+#             for j in range(len(grid[i])):
+#                 landInfo = LandInfo(0)
+#                 self.traverse(i, j, grid, landInfo)
+#                 if landInfo.currentSize > 0:
+#                     numberOfIslands += 1
+#         return numberOfIslands
+    
+    
+#     def traverse(self, i, j, grid, landInfo):
+#         if i < 0 or i >= len(grid):
+#             return
+#         if j < 0 or j >= len(grid[i]):
+#             return
+#         if grid[i][j] is "0":
+#             return
+#         grid[i][j] = "0"
+#         landInfo.currentSize += 1
+#         self.traverse(i+1, j, grid, landInfo)
+#         self.traverse(i-1, j, grid, landInfo)
+#         self.traverse(i, j-1, grid, landInfo)
+#         self.traverse(i, j+1, grid, landInfo)
+# 
+#     Sol#3
     def numIslands(self, grid: List[List[str]]) -> int:
         numberOfIslands = 0
         for i in range(len(grid)):
             for j in range(len(grid[i])):
-                landInfo = LandInfo(0)
-                self.traverse(i, j, grid, landInfo)
-                if landInfo.currentSize > 0:
+                if grid[i][j] is "1":
+                    self.traverse(i, j, grid)
                     numberOfIslands += 1
         return numberOfIslands
     
     
-    def traverse(self, i, j, grid, landInfo):
+    def traverse(self, i, j, grid):
         if i < 0 or i >= len(grid):
             return
         if j < 0 or j >= len(grid[i]):
@@ -53,8 +78,7 @@ class Solution:
         if grid[i][j] is "0":
             return
         grid[i][j] = "0"
-        landInfo.currentSize += 1
-        self.traverse(i+1, j, grid, landInfo)
-        self.traverse(i-1, j, grid, landInfo)
-        self.traverse(i, j-1, grid, landInfo)
-        self.traverse(i, j+1, grid, landInfo)
+        self.traverse(i+1, j, grid)
+        self.traverse(i-1, j, grid)
+        self.traverse(i, j-1, grid)
+        self.traverse(i, j+1, grid)
