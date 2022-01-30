@@ -32,7 +32,8 @@ class Solution:
 #         self.traverse(i-1, j, visited, grid, landInfo)
 #         self.traverse(i, j-1, visited, grid, landInfo)
 #         self.traverse(i, j+1, visited, grid, landInfo)
-
+# 
+#     Sol#2
     def numIslands(self, grid: List[List[str]]) -> int:
         numberOfIslands = 0
         for i in range(len(grid)):
