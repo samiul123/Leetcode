@@ -75,10 +75,14 @@ class Solution:
             return
         if j < 0 or j >= len(grid[i]):
             return
-        if grid[i][j] is "0":
-            return
+        # if grid[i][j] is "0":
+        #     return
         grid[i][j] = "0"
-        self.traverse(i+1, j, grid)
-        self.traverse(i-1, j, grid)
-        self.traverse(i, j-1, grid)
-        self.traverse(i, j+1, grid)
+        if i+1 < len(grid) and grid[i+1][j] is "1":
+            self.traverse(i+1, j, grid)
+        if i-1 >= 0 and grid[i-1][j] is "1":
+            self.traverse(i-1, j, grid)
+        if j-1 >= 0 and grid[i][j-1] is "1":
+            self.traverse(i, j-1, grid)
+        if j+1 < len(grid[i]) and grid[i][j+1] is "1":
+            self.traverse(i, j+1, grid)
