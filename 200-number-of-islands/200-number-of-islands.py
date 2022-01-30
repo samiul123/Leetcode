@@ -4,7 +4,7 @@ class LandInfo:
 
 
 class Solution:
-#     Sol#1
+#     Sol#1 (DFS)
 #     def numIslands(self, grid: List[List[str]]) -> int:
 #         visited = [[False for i in row]for row in grid]
 #         numberOfIslands = 0
@@ -33,7 +33,7 @@ class Solution:
 #         self.traverse(i, j-1, visited, grid, landInfo)
 #         self.traverse(i, j+1, visited, grid, landInfo)
 # 
-#     Sol#2
+#     Sol#2 (DFS-without visited array)
     def numIslands(self, grid: List[List[str]]) -> int:
         numberOfIslands = 0
         for i in range(len(grid)):
