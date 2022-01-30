@@ -60,6 +60,28 @@ class Solution:
 #         self.traverse(i, j+1, grid, landInfo)
 # 
 #     Sol#3 (DFS - optimizaztion in recursive call)
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         numberOfIslands = 0
+#         for i in range(len(grid)):
+#             for j in range(len(grid[i])):
+#                 if grid[i][j] is "1":
+#                     self.traverse(i, j, grid)
+#                     numberOfIslands += 1
+#         return numberOfIslands
+#    
+#    
+#     def traverse(self, i, j, grid):
+#         grid[i][j] = "0"
+#         if i+1 < len(grid) and grid[i+1][j] is "1":
+#             self.traverse(i+1, j, grid)
+#         if i-1 >= 0 and grid[i-1][j] is "1":
+#             self.traverse(i-1, j, grid)
+#         if j-1 >= 0 and grid[i][j-1] is "1":
+#             self.traverse(i, j-1, grid)
+#         if j+1 < len(grid[i]) and grid[i][j+1] is "1":
+#             self.traverse(i, j+1, grid)
+#    
+#   Sol#4 (BFS)
     def numIslands(self, grid: List[List[str]]) -> int:
         numberOfIslands = 0
         for i in range(len(grid)):
@@ -68,15 +90,20 @@ class Solution:
                     self.traverse(i, j, grid)
                     numberOfIslands += 1
         return numberOfIslands
-    
-    
+   
+
     def traverse(self, i, j, grid):
+        queue = [(i, j)]
         grid[i][j] = "0"
-        if i+1 < len(grid) and grid[i+1][j] is "1":
-            self.traverse(i+1, j, grid)
-        if i-1 >= 0 and grid[i-1][j] is "1":
-            self.traverse(i-1, j, grid)
-        if j-1 >= 0 and grid[i][j-1] is "1":
-            self.traverse(i, j-1, grid)
-        if j+1 < len(grid[i]) and grid[i][j+1] is "1":
-            self.traverse(i, j+1, grid)
+        while len(queue) > 0:
+            current_i, current_j = queue.pop(0)
+        
+            for next_i, next_j in [(current_i+1, current_j), (current_i-1, current_j), (current_i, current_j-1), (current_i, current_j + 1)]:
+                if next_i < 0 or next_i >= len(grid) or next_j < 0 or next_j >= len(grid[0]):
+                    continue
+                    
+                if grid[next_i][next_j] is "1":
+                    grid[next_i][next_j] = "0"
+                    queue.append((next_i, next_j))
+            
+    
