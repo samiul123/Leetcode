@@ -5,19 +5,16 @@ class Island:
 
 class Solution:
     def closedIsland(self, grid: List[List[int]]) -> int:
-        visited = [[False for col in row] for row in grid]
         count = 0
         
         for row in range(len(grid)):
             for col in range(len(grid[row])):
                 if grid[row][col] == 1:
                     continue
-                if visited[row][col]:
-                    continue
                     
                 island = Island(False)
                 
-                self.traverse(row, col, grid, visited, island)
+                self.traverse(row, col, grid, island)
                 
                 if not island.isConnectedToBorder:
                     count += 1
@@ -26,27 +23,23 @@ class Solution:
     
     
     
-    def traverse(self, row, col, grid, visited, island):
+    def traverse(self, row, col, grid, island):
         if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
             return
         
         if grid[row][col] == 1:
             return
         
-        if visited[row][col]:
-            return
-        
-        visited[row][col] = True
+        grid[row][col] = 1
     
-        
         if row == 0 or row == len(grid) - 1 or col == 0 or col == len(grid[0]) - 1:
             island.isConnectedToBorder = True
             
         
-        self.traverse(row + 1, col, grid, visited, island)
-        self.traverse(row - 1, col, grid, visited, island)
-        self.traverse(row, col + 1, grid, visited, island)
-        self.traverse(row, col - 1, grid, visited, island)
+        self.traverse(row + 1, col, grid, island)
+        self.traverse(row - 1, col, grid, island)
+        self.traverse(row, col + 1, grid, island)
+        self.traverse(row, col - 1, grid, island)
     
         
     
