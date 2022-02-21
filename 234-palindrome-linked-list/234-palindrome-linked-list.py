@@ -16,11 +16,11 @@ class Solution:
             # print("FAST: ", fast)
             # print("PREV: ", prev)
             fast = fast.next.next
-            # slow.next, slow, prev = prev, slow.next, slow
-            temp = slow
-            slow = slow.next
-            temp.next = prev
-            prev = temp
+            slow.next, slow, prev = prev, slow.next, slow
+            # temp = slow
+            # slow = slow.next
+            # temp.next = prev
+            # prev = temp
         
         if fast:
             slow = slow.next
