@@ -5,6 +5,10 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        
+#         STACK O(N)-Time O(N)-Space
+
+
         if not head.next:
             return True
         stack = []
@@ -21,7 +25,9 @@ class Solution:
             curr = curr.next
         return True
         
-#         4 pass
+    
+    
+#         4 PASS O(N)-Time O(1)-Space
 #         if not head.next:
 #             return True
         
