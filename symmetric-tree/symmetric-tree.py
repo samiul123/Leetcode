@@ -18,19 +18,23 @@ class Solution:
             self.getTraversal(root.left, PREORDER, leftTraversal)
             self.getTraversal(root.right, MODIFIED_PREORDER, rightTraversal)
             
-            if len(leftTraversal) != len(rightTraversal):
-                return False
-            
-            for i in range(len(leftTraversal)):
-                if leftTraversal[i] != rightTraversal[i]:
-                    return False 
-                
-            return True
+            return self.areEqual(leftTraversal, rightTraversal)
         
         elif root and not root.left and not root.right:
             return True
         
         return False
+    
+    
+    def areEqual(self, leftTraversal, rightTraversal):
+        if len(leftTraversal) != len(rightTraversal):
+            return False
+            
+        for i in range(len(leftTraversal)):
+            if leftTraversal[i] != rightTraversal[i]:
+                return False 
+
+        return True
     
     
     def getTraversal(self, node, type, traversal):
