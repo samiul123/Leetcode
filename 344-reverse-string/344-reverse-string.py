@@ -7,9 +7,7 @@ class Solution:
             if left >= right:
                 return
             
-            temp = s[left]
-            s[left] = s[right]
-            s[right] = temp
+            s[left], s[right] = s[right], s[left]
             
             helper(s, left+1, right-1)
         
