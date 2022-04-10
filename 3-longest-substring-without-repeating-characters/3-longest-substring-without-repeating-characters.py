@@ -45,12 +45,14 @@ class Solution:
             r = s[right]
             
             # chars[ord(r)] += 1
-            increaseCharCount(r)
+            
+            # increaseCharCount(r)
+            dic[r] = 1 if r not in dic else dic[r] + 1
 
-            while getCount(r) > 1:
+            while dic[r] > 1:
                 l = s[left]
                 # chars[ord(l)] -= 1
-                decreaseCharCount(l)
+                dic[l] -= 1
                 left += 1
             
             res = max(res, right - left + 1)
