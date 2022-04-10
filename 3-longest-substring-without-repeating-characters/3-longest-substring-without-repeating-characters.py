@@ -20,19 +20,37 @@ class Solution:
 #                     maxLength = max(maxLength, j - i + 1)
         
 #         return maxLength
+        
+        dic = {}
+        
+        def increaseCharCount(char):
+            if char in dic:
+                dic[char] += 1
+            else:
+                dic[char] = 1
+            
+        def decreaseCharCount(char):
+            dic[char] -= 1
+        
+        def getCount(char):
+            return dic[char]
 
-        chars = [0] * 128
+        # chars = [0] * 128
+        
 
         left = right = 0
 
         res = 0
         while right < len(s):
             r = s[right]
-            chars[ord(r)] += 1
+            
+            # chars[ord(r)] += 1
+            increaseCharCount(r)
 
-            while chars[ord(r)] > 1:
+            while getCount(r) > 1:
                 l = s[left]
-                chars[ord(l)] -= 1
+                # chars[ord(l)] -= 1
+                decreaseCharCount(l)
                 left += 1
             
             res = max(res, right - left + 1)
