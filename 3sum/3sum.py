@@ -2,7 +2,7 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         result = set()
         nums.sort()
-        for index, currentNumber in enumerate(nums):
+        for index, currentNumber in enumerate(nums[:-2]):
             remaining = 0 - currentNumber
             left = index + 1
             right = len(nums)-1
