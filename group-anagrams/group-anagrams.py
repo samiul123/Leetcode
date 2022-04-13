@@ -4,7 +4,6 @@ class Solution:
         result = []
         
         for idx, str in enumerate(strs):
-            print(idx, str)
             sortedStr = "".join(sorted(str))
             
             if sortedStr in dic:
