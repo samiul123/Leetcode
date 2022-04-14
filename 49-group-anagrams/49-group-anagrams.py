@@ -3,7 +3,7 @@ class Solution:
         dic = {}
         
         for idx, str in enumerate(strs):
-            sortedStr = "".join(sorted(str))
+            sortedStr = tuple(sorted(str))
             
             if sortedStr in dic:
                 dic[sortedStr].append(str)
