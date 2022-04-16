@@ -19,7 +19,7 @@ class Solution:
             print("CurrChar: {}".format(currChar))
             print("specialChars: ", specialChars)
             
-            if paragraph[right] in specialChars:
+            if currChar in specialChars:
                 currWord = paragraph[left:right].lower()
                 print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
                 if currWord not in bannedSet:
