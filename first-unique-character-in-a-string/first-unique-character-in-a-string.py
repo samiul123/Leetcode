@@ -1,9 +1,9 @@
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        charCount = {}
+        charCount = collections.defaultdict(int)
         
         for c in s:
-            charCount[c] = charCount.get(c, 0) + 1
+            charCount[c] += 1
         
         for i in range(len(s)):
             if charCount[s[i]] == 1:
