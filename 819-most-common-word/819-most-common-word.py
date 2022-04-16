@@ -19,11 +19,8 @@ class Solution:
             # print("CurrChar: {}".format(currChar))
             # print("specialChars: ", specialChars)
             
-            if currChar in specialChars or right == len(paragraph) - 1:
-                if right == len(paragraph) - 1 and currChar not in specialChars:
-                    currWord = paragraph[left:right+1].lower()
-                else:
-                    currWord = paragraph[left:right].lower()
+            if currChar in specialChars:
+                currWord = paragraph[left:right].lower()
                 # print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
                 if currWord not in bannedSet:
                     wordCount[currWord] += 1
@@ -32,9 +29,9 @@ class Solution:
                         maxFrequentWord = currWord
                     # print("MaxFrequency: {}, MaxFrequentWord: {}".format(maxFrequency, maxFrequentWord))
                 
-                if right == len(paragraph) - 1 and currChar not in specialChars:
-                    right += 1
-                    continue
+                # if right == len(paragraph) - 1 and currChar not in specialChars:
+                #     right += 1
+                #     continue
                 
                 if currChar == ' ':
                     right += 1
@@ -43,15 +40,15 @@ class Solution:
                         right += 1
                     right += 1
                 left = right
-            # elif right == len(paragraph) - 1:
-            #     currWord = paragraph[left:right+1].lower()
-            #     # print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
-            #     if currWord not in bannedSet:
-            #         wordCount[currWord] += 1
-            #         if wordCount[currWord] > maxFrequency:
-            #             maxFrequency = wordCount[currWord]
-            #             maxFrequentWord = currWord
-            #     right += 1
+            elif right == len(paragraph) - 1:
+                currWord = paragraph[left:right+1].lower()
+                # print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
+                if currWord not in bannedSet:
+                    wordCount[currWord] += 1
+                    if wordCount[currWord] > maxFrequency:
+                        maxFrequency = wordCount[currWord]
+                        maxFrequentWord = currWord
+                right += 1
             else:
                 right += 1    
         
