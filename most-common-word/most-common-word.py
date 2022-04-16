@@ -20,7 +20,6 @@ class Solution:
             print("specialChars: ", specialChars)
             
             if paragraph[right] in specialChars:
-#                 PROCESS [left, right-1]
                 currWord = paragraph[left:right].lower()
                 print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
                 if currWord not in bannedSet:
