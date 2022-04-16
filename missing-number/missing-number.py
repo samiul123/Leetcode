@@ -10,12 +10,12 @@ class Solution:
 #                 return i
         length = len(nums)
         sumInRange = 0
+        sumInNums = 0
+        
         for i in range(length+1):
             sumInRange += i
-        
-        sumInNums = 0
-        for i in nums:
-            sumInNums += i
+            if i < length:
+                sumInNums += nums[i]    
         
         return sumInRange - sumInNums
         
