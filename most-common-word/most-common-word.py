@@ -16,18 +16,18 @@ class Solution:
         while right < len(paragraph):
             currChar = paragraph[right]
             
-            print("CurrChar: {}".format(currChar))
-            print("specialChars: ", specialChars)
+            # print("CurrChar: {}".format(currChar))
+            # print("specialChars: ", specialChars)
             
-            if currChar in specialChars:
+            if currChar in specialChars :
                 currWord = paragraph[left:right].lower()
-                print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
+                # print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
                 if currWord not in bannedSet:
                     wordCount[currWord] += 1
                     if wordCount[currWord] > maxFrequency:
                         maxFrequency = wordCount[currWord]
                         maxFrequentWord = currWord
-                    print("MaxFrequency: {}, MaxFrequentWord: {}".format(maxFrequency, maxFrequentWord))
+                    # print("MaxFrequency: {}, MaxFrequentWord: {}".format(maxFrequency, maxFrequentWord))
                     
                 if currChar == ' ':
                     right += 1
@@ -38,7 +38,7 @@ class Solution:
                 left = right
             elif right == len(paragraph) - 1:
                 currWord = paragraph[left:right+1].lower()
-                print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
+                # print("Left: {}, Right: {}, CurrWord: {}".format(left, right, currWord))
                 if currWord not in bannedSet:
                     wordCount[currWord] += 1
                     if wordCount[currWord] > maxFrequency:
