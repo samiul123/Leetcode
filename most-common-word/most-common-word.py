@@ -36,10 +36,6 @@ class Solution:
                     while right < len(paragraph) and paragraph[right] != " ":
                         right += 1
                     right += 1
-                # elif currChar == "'":
-                #     right += 3
-                # else:
-                #     right += 2
                 left = right
             elif right == len(paragraph) - 1:
                 currWord = paragraph[left:right+1].lower()
