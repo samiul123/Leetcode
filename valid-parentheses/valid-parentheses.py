@@ -8,7 +8,7 @@ class Solution:
             else:
                 if len(stack) == 0:
                     return False
-                if (stack[len(stack)-1] == "(" and char == ")") or (stack[len(stack)-1] == "{" and char == "}") or (stack[len(stack)-1] == "[" and char == "]"):
+                elif (stack[len(stack)-1] == "(" and char == ")") or (stack[len(stack)-1] == "{" and char == "}") or (stack[len(stack)-1] == "[" and char == "]"):
                     stack.pop()
                 else:
                     return False
