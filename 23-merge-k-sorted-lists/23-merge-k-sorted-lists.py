@@ -5,12 +5,16 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        
+        
 #         divide and conquer
         if len(lists) == 0:
             return None
         length = len(lists)
         step = 1
         while step < length:
+            print("STEP: {}, LENGTH: {}".format(step, length))
+            print("RANGE: {} ->".format(range(0, length - step, step*2)), *range(0, length - step, step*2))
             for i in range(0, length - step, step*2):
                 lists[i] = self.getMergedHead(lists[i], lists[i+step])
             step = step*2
