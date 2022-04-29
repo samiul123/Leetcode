@@ -13,12 +13,10 @@ class Solution:
         
         
         while temp:
-            # print("TEMP: {}, COUNT: {}".format(temp, counter))
             if counter == k:
                 currHead = start
                 temp1 = start
                 
-                # print("START: {}, END: {}".format(start, end))
                 while temp1.next and currHead != end:
                     remove = temp1.next
                     temp1.next = remove.next
@@ -33,11 +31,9 @@ class Solution:
                 counter = 1
                 start = temp1.next
                 temp = start
-                # print("START: {}".format(start))
                 end = start
             else:
                 counter += 1
                 end = temp.next
-                # print("TEMP: {}".format(temp))
                 temp = temp.next
         return head
