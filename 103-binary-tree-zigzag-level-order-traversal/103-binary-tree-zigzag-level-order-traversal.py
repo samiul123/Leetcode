@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
+from collections import deque
 
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
@@ -17,12 +17,12 @@ class Solution:
             node, currLevel = queue.pop(0)
             
             if currLevel != prevLevel:
-                traversal.append([])
+                traversal.append(deque())
             
             if currLevel % 2 == 0:
                 traversal[currLevel].append(node.val)
             else:
-                traversal[currLevel].insert(0, node.val)
+                traversal[currLevel].appendleft(node.val)
             
             prevLevel = currLevel 
             
