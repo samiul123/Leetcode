@@ -5,9 +5,10 @@
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-#         here
+# here for level-wise storingg the item, list is used which takes linear time to insert at the head
         traversal = []
         queue = [(root, 0)] if root else None
         prevLevel = -1
