@@ -9,6 +9,7 @@ from collections import deque
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
 # here for level-wise storingg the item, list is used which takes linear time to insert at the head
+# updated version used deque which takes constant time to insert item at the head
         traversal = []
         queue = [(root, 0)] if root else None
         prevLevel = -1
