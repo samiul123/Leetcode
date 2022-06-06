@@ -4,28 +4,30 @@ class Solution:
             return 0
         
         generics = collections.defaultdict(list)
-        for word in wordList:
+        for idx, word in enumerate(wordList):
             for i in range(len(word)):
-                generics[word[:i]+"*"+word[i+1:]].append(word)
+                generics[word[:i]+"*"+word[i+1:]].append(idx)
                 
-                
-        queue = collections.deque([(beginWord, 1)])
+        wordList.append(beginWord)
+        queue = collections.deque([(len(wordList)-1, 1)])
         
-        visited = {beginWord}
+        visited = {len(wordList)-1}
         
         # print(generics)
         while queue:
-            currentWord, level = queue.popleft()
+            curr_idx, level = queue.popleft()
+            currentWord = wordList[curr_idx]
             for i in range(len(currentWord)):
                 intermediateWord = currentWord[:i]+"*"+currentWord[i+1:]
                 # print(intermediateWord)
                 # print(generics[intermediateWord])
-                for word in generics[intermediateWord]:
+                for idx in generics[intermediateWord]:
+                    word = wordList[idx]
                     if word == endWord:
                         return level+1
-                    if word not in visited:
-                        visited.add(word)
-                        queue.append((word, level+1))
+                    if idx not in visited:
+                        visited.add(idx)
+                        queue.append((idx, level+1))
                 generics[intermediateWord] = []
                 
         return 0
