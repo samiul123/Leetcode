@@ -4,10 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    def __init__(self):
-        self.diameter = 0
-        
+class Solution:      
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         def recurse(root):
             if not root:
@@ -15,10 +12,12 @@ class Solution:
 
             leftHeight = recurse(root.left)
             rightHeight = recurse(root.right)
-
-            self.diameter = max(self.diameter, leftHeight + rightHeight)
+            
+            nonlocal diameter
+            diameter = max(diameter, leftHeight + rightHeight)
 
             return 1+max(leftHeight, rightHeight)
         
+        diameter = 0
         recurse(root)
-        return self.diameter
+        return diameter
