@@ -62,27 +62,39 @@ class Solution {
     }
 
     public int[] topKFrequent(int[] nums, int k) {
+//         Map<Integer, Integer> frequencyMap = new HashMap<>();
+//         Arrays.stream(nums).forEach(num -> frequencyMap.put(num, frequencyMap.getOrDefault(num, 0)+1));
+
+//         NumberFrequency[] frequencies = new NumberFrequency[frequencyMap.size()];
+
+//         final int[] i = {0};
+//         frequencyMap.forEach((num, frequency) -> {
+//             NumberFrequency numberFrequency = new NumberFrequency(num, frequency);
+//             frequencies[i[0]] = numberFrequency;
+//             i[0] += 1;
+//         });
+
+//         buildHeap(frequencies, frequencies.length);
+
+//         // Arrays.stream(frequencies).forEach(System.out::println);
+//         // System.out.println();
+//         int[] result = new int[k];
+//         for (int j = 0; j < k; j++) {
+//             result[j] = extractMax(frequencies, frequencies.length-j).getNumber();
+//             // Arrays.stream(frequencies).forEach(System.out::println);
+//             // System.out.println();
+//         }
+//         return result;
         Map<Integer, Integer> frequencyMap = new HashMap<>();
-        Arrays.stream(nums).forEach(num -> frequencyMap.put(num, frequencyMap.getOrDefault(num, 0)+1));
+        Arrays.stream(nums).forEach(num -> frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1));
 
-        NumberFrequency[] frequencies = new NumberFrequency[frequencyMap.size()];
+        Queue<NumberFrequency> heap = new PriorityQueue<>(Comparator.comparingInt(NumberFrequency::getFrequency).reversed());
 
-        final int[] i = {0};
-        frequencyMap.forEach((num, frequency) -> {
-            NumberFrequency numberFrequency = new NumberFrequency(num, frequency);
-            frequencies[i[0]] = numberFrequency;
-            i[0] += 1;
-        });
+        frequencyMap.forEach((number, count) -> heap.add(new NumberFrequency(number, count)));
 
-        buildHeap(frequencies, frequencies.length);
-
-        // Arrays.stream(frequencies).forEach(System.out::println);
-        // System.out.println();
         int[] result = new int[k];
-        for (int j = 0; j < k; j++) {
-            result[j] = extractMax(frequencies, frequencies.length-j).getNumber();
-            // Arrays.stream(frequencies).forEach(System.out::println);
-            // System.out.println();
+        for (int i = 0; i < k; i++) {
+            result[i] = heap.poll().getNumber();
         }
         return result;
     }
