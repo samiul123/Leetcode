@@ -28,10 +28,10 @@ class Solution {
         int rightChildIndex = 2 * index + 2;
         int largestValIndex = index;
 
-        if (leftChildIndex < heapSize  && nums[largestValIndex].getFrequency() < nums[leftChildIndex].getFrequency()) {
+        if (leftChildIndex < heapSize && nums[largestValIndex].getFrequency() < nums[leftChildIndex].getFrequency()) {
             largestValIndex = leftChildIndex;
         }
-        if (rightChildIndex < heapSize  && nums[largestValIndex].getFrequency() < nums[rightChildIndex].getFrequency()) {
+        if (rightChildIndex < heapSize && nums[largestValIndex].getFrequency() < nums[rightChildIndex].getFrequency()) {
             largestValIndex = rightChildIndex;
         }
 
