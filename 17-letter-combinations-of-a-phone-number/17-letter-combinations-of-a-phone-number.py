@@ -8,16 +8,16 @@ class Solution:
         
         def findCombinations(idx, combination):
             if len(combination) == len(digits):
-                combinations.append(combination)
+                combinations.append("".join(combination))
                 return
               
             letters = configDict[digits[idx]]
             for i in range(len(letters)):
-                combination += letters[i]
+                combination.append(letters[i])
                 findCombinations(idx + 1, combination)
-                combination = combination[:-1]
+                combination.pop()
         
-        findCombinations(0, "")
+        findCombinations(0, [])
         
         return combinations
         
