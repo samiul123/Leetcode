@@ -4,7 +4,7 @@ class Solution:
         combinations = []
         
         def recurse(open, close, combination):
-            if open == n and close == n:
+            if open == close == n:
                 combinations.append("".join(combination))
                 return
             
