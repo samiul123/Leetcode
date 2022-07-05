@@ -8,7 +8,6 @@ class Solution:
         
         def findCombinations(idx, combination):
             if len(combination) == len(digits):
-                # print(combination)
                 combinations.append(combination)
                 return
               
