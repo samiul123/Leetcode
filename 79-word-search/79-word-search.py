@@ -2,6 +2,10 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         n_row = len(board)
         n_col = len(board[0])
+        
+        if n_row*n_col < len(word):
+            return False
+        
         visited = [[False for col in range(n_col)] for row in range(n_row)]
         search_idx = 0
         
