@@ -85,12 +85,6 @@ class Solution:
 
             if curr_node.isEnd:
                 matched_words.append(curr_node.word)
-                # curr_node.setEnd(False)
-                # curr_node.setWord("")
-                # # pruning out the matched word from the trie
-                # if not trie.checkIfAnyWordUnderTheNode(curr_node):
-                #     parentNode.put(letter, None)
-                
 
             board[row][col] = '#'
 
@@ -106,13 +100,10 @@ class Solution:
 
             board[row][col] = letter
             curr_node.setEnd(False)
-            curr_node.setWord("")
+            # curr_node.setWord("")
             # pruning out the matched word from the trie
             if not curr_node.checkIfAnyLinkExists():
                 parentNode.put(letter, None)
-            # if curr_node:
-            #     curr_node.setEnd(False)
-            #     curr_node.setWord("")
 
         for i in range(n_rows):
             for j in range(n_cols):
