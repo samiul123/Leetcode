@@ -60,12 +60,6 @@ class Trie:
             if self.checkIfAnyWordUnderTheNode(link):
                 return True
         return False
-        # if node:
-        #     for link in node.links:
-        #         if link and link.isEnd:
-        #             return True
-        #         return False or self.checkIfAnyWordUnderTheNode(link)
-            
 
 
 def buildTrie(words: List[str]) -> Trie:
@@ -85,7 +79,6 @@ class Solution:
 
         def backtrack(row, col, curr_node):
             letter = board[row][col]
-            # path.append(letter)
             parentNode = curr_node
             curr_node = curr_node.get(letter)
             if not curr_node:
@@ -93,7 +86,6 @@ class Solution:
 
             if curr_node.isEnd:
                 matched_words.add(curr_node.word)
-                # return
                 # pruning out the matched word from the trie
                 if not trie.checkIfAnyWordUnderTheNode(curr_node):
                     parentNode.put(letter, None)
@@ -111,15 +103,10 @@ class Solution:
                     continue
                 backtrack(new_row, new_col, curr_node)
 
-            # path.pop()
             board[row][col] = letter
-            # parentNode.put(letter, None)
-            # if not parentNode:
-            #     parentNode.put(letter, None)
 
         for i in range(n_rows):
             for j in range(n_cols):
-                # if trie.startsWith(board[i][j]):
                 backtrack(i, j, trie.root)
 
         return matched_words
