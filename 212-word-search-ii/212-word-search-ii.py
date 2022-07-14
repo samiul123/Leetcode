@@ -100,8 +100,8 @@ class Solution:
                     continue
                 if board[new_row][new_col] == '#':
                     continue
-                if not curr_node.containsKey(board[new_row][new_col]):
-                    continue
+                # if not curr_node.containsKey(board[new_row][new_col]):
+                #     continue
                 backtrack(new_row, new_col, curr_node)
 
             board[row][col] = letter
