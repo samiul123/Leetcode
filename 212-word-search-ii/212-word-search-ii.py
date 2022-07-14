@@ -86,7 +86,7 @@ class Solution:
 
             if curr_node.isEnd:
                 matched_words.add(curr_node.word)
-                curr_node.setEnd(False)
+                # curr_node.setEnd(False)
                 # pruning out the matched word from the trie
                 if not trie.checkIfAnyWordUnderTheNode(curr_node):
                     parentNode.put(letter, None)
