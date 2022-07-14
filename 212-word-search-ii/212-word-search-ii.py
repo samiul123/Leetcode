@@ -75,7 +75,7 @@ class Solution:
         
         n_rows = len(board)
         n_cols = len(board[0])
-        matched_words = set()
+        matched_words = []
 
         def backtrack(row, col, curr_node):
             letter = board[row][col]
@@ -85,11 +85,13 @@ class Solution:
                 return
 
             if curr_node.isEnd:
-                matched_words.add(curr_node.word)
-                # curr_node.setEnd(False)
+                matched_words.append(curr_node.word)
+                curr_node.setEnd(False)
+                curr_node.setWord("")
                 # pruning out the matched word from the trie
                 if not trie.checkIfAnyWordUnderTheNode(curr_node):
                     parentNode.put(letter, None)
+                
 
             board[row][col] = '#'
 
@@ -105,6 +107,9 @@ class Solution:
                 backtrack(new_row, new_col, curr_node)
 
             board[row][col] = letter
+            # if curr_node:
+            #     curr_node.setEnd(False)
+            #     curr_node.setWord("")
 
         for i in range(n_rows):
             for j in range(n_cols):
