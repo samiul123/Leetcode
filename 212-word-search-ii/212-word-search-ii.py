@@ -1,159 +1,128 @@
+class TrieNode:
+    def __init__(self, char):
+        self.links = [None] * 26
+        self.isEnd = False
+        self.char = char
+        self.word = ""
+
+    def containsKey(self, char: str) -> bool:
+        return self.links[ord(char) - ord('a')] is not None
+
+    def get(self, char: str):
+        return self.links[ord(char) - ord('a')]
+
+    def put(self, char: str, node) -> None:
+        self.links[ord(char) - ord('a')] = node
+
+    def setEnd(self, isEnd) -> None:
+        self.isEnd = isEnd
+
+    def setWord(self, word) -> None:
+        self.word = word
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode("/")
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for letter in word:
+            if not node.containsKey(letter):
+                node.put(letter, TrieNode(letter))
+            node = node.get(letter)
+        node.setWord(word)
+        node.setEnd(True)
+    
+    # O(len(word))
+    def searchPrefix(self, word: str) -> TrieNode or None:
+        node = self.root
+        for letter in word:
+            if not node.containsKey(letter):
+                return None
+            node = node.get(letter)
+        return node
+
+    def search(self, word: str) -> bool:
+        node = self.searchPrefix(word)
+        return node and node.isEnd
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self.searchPrefix(prefix)
+        return node is not None
+    
+    def checkIfAnyWordUnderTheNode(self, node):
+        if not node:
+            return False
+        for link in node.links:
+            if link and link.isEnd:
+                return True
+            if self.checkIfAnyWordUnderTheNode(link):
+                return True
+        return False
+        # if node:
+        #     for link in node.links:
+        #         if link and link.isEnd:
+        #             return True
+        #         return False or self.checkIfAnyWordUnderTheNode(link)
+            
+
+
+def buildTrie(words: List[str]) -> Trie:
+    trie = Trie()
+    for word in words:
+        trie.insert(word)
+    return trie
+
+
 class Solution:
-    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        WORD_KEY = '$'
+    def findWords(self, board: List[List[str]], words: List[str]) -> set:
+        trie = buildTrie(words)
         
-        trie = {}
-        for word in words:
-            node = trie
-            for letter in word:
-                # retrieve the next node; If not found, create a empty node.
-                node = node.setdefault(letter, {})
-            # mark the existence of a word in trie node
-            node[WORD_KEY] = word
-        
-        rowNum = len(board)
-        colNum = len(board[0])
-        
-        matchedWords = []
-        
-        def backtracking(row, col, parent):    
-            
+        n_rows = len(board)
+        n_cols = len(board[0])
+        matched_words = set()
+
+        def backtrack(row, col, curr_node):
             letter = board[row][col]
-            currNode = parent[letter]
-            
-            # check if we find a match of word
-            word_match = currNode.pop(WORD_KEY, False)
-            if word_match:
-                # also we removed the matched word to avoid duplicates,
-                #   as well as avoiding using set() for results.
-                matchedWords.append(word_match)
-            
-            # Before the EXPLORATION, mark the cell as visited 
+            # path.append(letter)
+            parentNode = curr_node
+            curr_node = curr_node.get(letter)
+            if not curr_node:
+                return
+
+            if curr_node.isEnd:
+                matched_words.add(curr_node.word)
+                # return
+                # pruning out the matched word from the trie
+                if not trie.checkIfAnyWordUnderTheNode(curr_node):
+                    parentNode.put(letter, None)
+
             board[row][col] = '#'
-            
-            # Explore the neighbors in 4 directions, i.e. up, right, down, left
-            for (rowOffset, colOffset) in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
-                newRow, newCol = row + rowOffset, col + colOffset     
-                if newRow < 0 or newRow >= rowNum or newCol < 0 or newCol >= colNum:
+
+            for dRow, dCol in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                new_row = row + dRow
+                new_col = col + dCol
+                if new_row < 0 or new_row >= n_rows or new_col < 0 or new_col >= n_cols:
                     continue
-                if not board[newRow][newCol] in currNode:
+                if board[new_row][new_col] == '#':
                     continue
-                backtracking(newRow, newCol, currNode)
-        
-            # End of EXPLORATION, we restore the cell
+                if not curr_node.containsKey(board[new_row][new_col]):
+                    continue
+                backtrack(new_row, new_col, curr_node)
+
+            # path.pop()
             board[row][col] = letter
-        
-            # Optimization: incrementally remove the matched leaf node in Trie.
-            if not currNode:
-                parent.pop(letter)
+            # parentNode.put(letter, None)
+            # if not parentNode:
+            #     parentNode.put(letter, None)
 
-        for row in range(rowNum):
-            for col in range(colNum):
-                # starting from each of the cells
-                if board[row][col] in trie:
-                    backtracking(row, col, trie)
-        
-        return matchedWords    
+        for i in range(n_rows):
+            for j in range(n_cols):
+                # if trie.startsWith(board[i][j]):
+                backtrack(i, j, trie.root)
 
-# class TrieNode:
-#     def __init__(self, char):
-#         self.links = [None] * 26
-#         self.isEnd = False
-#         self.char = char
-#         self.word = ""
-
-#     def containsKey(self, char: str) -> bool:
-#         return self.links[ord(char) - ord('a')] is not None
-
-#     def get(self, char: str):
-#         return self.links[ord(char) - ord('a')]
-
-#     def put(self, char: str, node) -> None:
-#         self.links[ord(char) - ord('a')] = node
-
-#     def setEnd(self) -> None:
-#         self.isEnd = True
-
-#     def setWord(self, word) -> None:
-#         self.word = word
-
-
-# class Trie:
-#     def __init__(self):
-#         self.root = TrieNode("/")
-
-#     def insert(self, word: str) -> None:
-#         node = self.root
-#         for letter in word:
-#             if not node.containsKey(letter):
-#                 node.put(letter, TrieNode(letter))
-#             node = node.get(letter)
-#         node.setWord(word)
-#         node.setEnd()
-
-#     def searchPrefix(self, word: str) -> TrieNode or None:
-#         node = self.root
-#         for letter in word:
-#             if not node.containsKey(letter):
-#                 return None
-#             node = node.get(letter)
-#         return node
-
-#     def search(self, word: str) -> bool:
-#         node = self.searchPrefix(word)
-#         return node
-
-#     def startsWith(self, prefix: str) -> bool:
-#         node = self.searchPrefix(prefix)
-#         return node is not None
-
-
-# def buildTrie(words: List[str]) -> Trie:
-#     trie = Trie()
-#     for word in words:
-#         trie.insert(word)
-#     return trie
-
-
-# class Solution:
-#     def findWords(self, board: List[List[str]], words: List[str]) -> set:
-#         trie = buildTrie(words)
-#         n_rows = len(board)
-#         n_cols = len(board[0])
-#         matched_words = set()
-
-#         def backtrack(row, col, curr_node, path):
-#             letter = board[row][col]
-#             # path.append(letter)
-
-#             curr_node = curr_node.get(letter)
-#             if not curr_node:
-#                 return
-
-#             if curr_node.isEnd:
-#                 matched_words.add(curr_node.word)
-
-#             board[row][col] = '#'
-
-#             for dRow, dCol in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-#                 new_row = row + dRow
-#                 new_col = col + dCol
-#                 if new_row < 0 or new_row >= n_rows or new_col < 0 or new_col >= n_cols:
-#                     continue
-#                 if board[new_row][new_col] == '#':
-#                     continue
-#                 if not curr_node.containsKey(board[new_row][new_col]):
-#                     continue
-#                 backtrack(new_row, new_col, curr_node, path)
-
-#             # path.pop()
-#             board[row][col] = letter
-
-#         for i in range(n_rows):
-#             for j in range(n_cols):
-#                 backtrack(i, j, trie.root, [])
-
-#         return matched_words
+        return matched_words
 
     
     
