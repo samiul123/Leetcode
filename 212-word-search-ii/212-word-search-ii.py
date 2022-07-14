@@ -100,7 +100,6 @@ class Solution:
 
             board[row][col] = letter
             curr_node.setEnd(False)
-            # curr_node.setWord("")
             # pruning out the matched word from the trie
             if not curr_node.checkIfAnyLinkExists():
                 parentNode.put(letter, None)
