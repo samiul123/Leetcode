@@ -19,6 +19,14 @@ class TrieNode:
 
     def setWord(self, word) -> None:
         self.word = word
+        
+    def checkIfAnyLinkExists(self):
+        if not self:
+            return False
+        for link in self.links:
+            if link:
+                return True
+        return False
 
 
 class Trie:
@@ -51,13 +59,6 @@ class Trie:
         node = self.searchPrefix(prefix)
         return node is not None
     
-    def checkIfAnyLinkExists(self, node):
-        if not node:
-            return False
-        for link in node.links:
-            if link:
-                return True
-        return False
 
 
 def buildTrie(words: List[str]) -> Trie:
@@ -100,15 +101,14 @@ class Solution:
                     continue
                 if board[new_row][new_col] == '#':
                     continue
-                # if not curr_node.containsKey(board[new_row][new_col]):
-                #     continue
+                    
                 backtrack(new_row, new_col, curr_node)
 
             board[row][col] = letter
             curr_node.setEnd(False)
             curr_node.setWord("")
             # pruning out the matched word from the trie
-            if not trie.checkIfAnyLinkExists(curr_node):
+            if not curr_node.checkIfAnyLinkExists():
                 parentNode.put(letter, None)
             # if curr_node:
             #     curr_node.setEnd(False)
