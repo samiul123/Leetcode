@@ -75,7 +75,7 @@ class Solution:
         
         n_rows = len(board)
         n_cols = len(board[0])
-        matched_words = list()
+        matched_words = set()
 
         def backtrack(row, col, curr_node):
             letter = board[row][col]
@@ -85,7 +85,7 @@ class Solution:
                 return
 
             if curr_node.isEnd:
-                matched_words.append(curr_node.word)
+                matched_words.add(curr_node.word)
                 curr_node.setEnd(False)
                 # pruning out the matched word from the trie
                 if not trie.checkIfAnyWordUnderTheNode(curr_node):
