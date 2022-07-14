@@ -51,13 +51,11 @@ class Trie:
         node = self.searchPrefix(prefix)
         return node is not None
     
-    def checkIfAnyWordUnderTheNode(self, node):
+    def checkIfAnyLinkExists(self, node):
         if not node:
             return False
         for link in node.links:
-            if link and link.isEnd:
-                return True
-            if self.checkIfAnyWordUnderTheNode(link):
+            if link:
                 return True
         return False
 
@@ -110,7 +108,7 @@ class Solution:
             curr_node.setEnd(False)
             curr_node.setWord("")
             # pruning out the matched word from the trie
-            if not trie.checkIfAnyWordUnderTheNode(curr_node):
+            if not trie.checkIfAnyLinkExists(curr_node):
                 parentNode.put(letter, None)
             # if curr_node:
             #     curr_node.setEnd(False)
