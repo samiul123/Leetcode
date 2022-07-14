@@ -75,7 +75,7 @@ class Solution:
         
         n_rows = len(board)
         n_cols = len(board[0])
-        matched_words = []
+        matched_words = list()
 
         def backtrack(row, col, curr_node):
             letter = board[row][col]
