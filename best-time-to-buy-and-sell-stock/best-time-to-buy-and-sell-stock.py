@@ -7,7 +7,7 @@ class Solution:
         while right < len(prices):
             currprofit = prices[right] - prices[left]
             
-            if currprofit < 0:
+            if currprofit <= 0:
                 left = right
                 right += 1
             else:
