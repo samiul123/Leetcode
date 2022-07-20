@@ -69,6 +69,41 @@ def buildTrie(words: List[str]) -> Trie:
 
 
 class Solution:
+    
+#     def findWords(self, board: List[List[str]], words: List[str]) -> set:
+#         included_words = set()
+#         n_rows = len(board)
+#         n_cols = len(board[0])
+
+#         def backtrack(board, word, row, col, index=0):
+#             if row < 0 or row >= n_rows or col < 0 or col >= n_cols:
+#                 return
+
+#             curr_letter = board[row][col]
+
+#             if word[index] == curr_letter:
+#                 if index == len(word) - 1:
+#                     included_words.add(word)
+#                     return
+
+#                 board[row][col] = '#'
+#                 adjacent_cells = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+#                 for d_row, d_col in adjacent_cells:
+#                     adj_row = row + d_row
+#                     adj_col = col + d_col
+
+#                     backtrack(board, word, adj_row, adj_col, index + 1)
+
+#             board[row][col] = curr_letter
+
+
+#         for word in words:
+#             for i in range(len(board)):
+#                 for j in range(len(board[0])):
+#                     backtrack(board, word, i, j)
+
+#         return included_words
     def findWords(self, board: List[List[str]], words: List[str]) -> set:
         trie = buildTrie(words)
         
@@ -100,7 +135,6 @@ class Solution:
 
             board[row][col] = letter
             curr_node.setEnd(False)
-            curr_node.setWord("")
             # pruning out the matched word from the trie
             if not curr_node.checkIfAnyLinkExists():
                 parentNode.put(letter, None)
