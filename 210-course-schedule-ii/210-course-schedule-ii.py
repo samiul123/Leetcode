@@ -44,6 +44,7 @@ class Solution:
                     dfs(adjCourse, status)
                 elif status[adjCourse] == IN_PROCESS:
                     isPossible = False
+                    return
             
             status[courseToVisit] = VISITED
             orderedResult.append(courseToVisit)
