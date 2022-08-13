@@ -33,6 +33,10 @@ class Solution:
         
         def dfs(courseToVisit, status):
             nonlocal isPossible
+            
+            if not isPossible:
+                return
+                
             status[courseToVisit] = IN_PROCESS
             
             for adjCourse in adjList[courseToVisit]:
