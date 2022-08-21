@@ -24,6 +24,9 @@ class Solution:
                         result.add((nums[i], nums[j], nums[left], nums[right]))
                         left += 1
                         right -= 1
+                        while left < right and nums[left] == nums[left-1]:
+                            left += 1
+                        
                     
                     elif sum < target:
                         left += 1
