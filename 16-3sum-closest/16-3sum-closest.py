@@ -12,15 +12,16 @@ class Solution:
                 sum = nums[i] + nums[left] + nums[right]
                 diff = abs(target - sum)
                 
-                if diff == 0:
-                    return sum
-                
                 if diff < minDiff:
                     minDiff = diff
                     resultSum = sum
+                    
+                if sum == target:
+                    return resultSum
                 
-                if sum > target:
+                elif sum > target:
                     right -= 1
-                elif sum < target:
+                else:
                     left += 1
+                    
         return resultSum
