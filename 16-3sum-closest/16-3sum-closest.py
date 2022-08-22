@@ -1,5 +1,6 @@
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
+        # O(NlogN + N^2)
         nums.sort()
         minDiff = math.inf
         resultSum = 0
