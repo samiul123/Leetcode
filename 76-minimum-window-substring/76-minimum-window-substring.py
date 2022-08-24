@@ -5,6 +5,7 @@
 # Otherwise, expand the window
 # finally return the substring which corresponds to the minWindow size
 
+# Here I am only storing 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         char_t_frequency = collections.defaultdict(int)
