@@ -5,7 +5,12 @@
 # Otherwise, expand the window
 # finally return the substring which corresponds to the minWindow size
 
-# Here I am only storing 
+# Here I am only storing frequency of letters in t
+# In Worst case,it will be O(t) + O(s) (which is basically same as O(t))
+# So, Overall O(t)
+
+# TIme complexity -> O(t+2s) -> 2 because both left and right pointer may come 
+# across same character 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         char_t_frequency = collections.defaultdict(int)
