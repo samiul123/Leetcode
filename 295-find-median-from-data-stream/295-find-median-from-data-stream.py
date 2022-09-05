@@ -4,9 +4,6 @@ class MedianFinder:
         self.store = []
         
     def addNum(self, num: int) -> None:
-        # if len(self.store) == 0:
-        #     self.store.append(num)
-        # else:
         self.insert(num)
         
     def findMedian(self) -> float:
